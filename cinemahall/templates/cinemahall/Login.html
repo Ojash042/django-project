@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    Login - Cinema
+{% endblock %}
+{% block content %}
+    {% load static %}
+    <div id="root"></div>
+    <script>
+        const csrfToken = '{{ csrf_token }}'
+    </script>
+    <script src="{% static 'js/main.a9079cbb.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load static %}
+    <div id="root" class="py-3">
+    </div>
+    <script>
+        const csrfToken = '{{ csrf_token }}'
+    </script>
+    <script src="{% static 'js/main.5e120945.js' %}"></script>
+{% endblock %}

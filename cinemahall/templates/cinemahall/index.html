@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    Cinema
+{% endblock %}
+{% block content %}
+    {% load static %}
+    <div id="root"></div>
+    {% for film in films %}
+        <li>{{  film.film_cast }}</li>
+    {% endfor %}
+    <script src="{% static 'js/main.f6d18010.js' %}"></script>
+{% endblock %}
