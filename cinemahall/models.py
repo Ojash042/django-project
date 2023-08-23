@@ -2,7 +2,7 @@ from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
-
+from humanize import naturalday
 from Cinema_Hall_Ticket import settings
 from .managers import CustomUserManager
 
@@ -51,13 +51,16 @@ class Screening(models.Model):
     screening_start_time = models.TimeField()
 
     def __str__(self):
-        return f'Film: {self.Film.film_name} Theatre: {self.Theatre.theatre_name} Screening Start Time: {self.screening_start_time}'
+        return f'Film: {self.Film.film_name} Theatre: {self.Theatre.theatre_name} Starts: {self.screening_start_time.isoformat(timespec="minutes")} Date:{naturalday(self.screening_start_date)}'
 
 
 class Seat(models.Model):
     Theatre = models.ForeignKey(Theatre, on_delete=models.CASCADE)
     seat_row = models.CharField(max_length=2)
     seat_column = models.IntegerField()
+
+    def __str__(self):
+        return f'Seat {self.seat_row} {self.seat_column} @ {self.Theatre.theatre_name}'
 
 
 class ReservationType(models.Model):
@@ -74,6 +77,6 @@ class Reservation(models.Model):
 
 
 class SeatReserved(models.Model):
-    Seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
+    Seat = models.OneToOneField(Seat, on_delete=models.CASCADE)
     Reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
     Screening = models.ForeignKey(Screening, on_delete=models.CASCADE)

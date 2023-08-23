@@ -11,3 +11,4 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Customer.objects.create_user(**validated_data)
+

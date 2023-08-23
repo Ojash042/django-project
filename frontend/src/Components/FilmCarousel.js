@@ -1,24 +1,16 @@
 import React from "react";
-import axios from "axios";
 import {Carousel} from "react-bootstrap";
 
-export function FilmCarousel(){
-    const [filmList, setFilmList] = React.useState([])
-    React.useEffect(()=> {
-        axios.get('http://localhost:8000/api/filmlists')
-            .then((response) => {
-            setFilmList(response.data);
-            }) 
-    },[])
-  
+
+export function FilmCarousel({filmList}){
     return(
         <Carousel>
-            {filmList.map((film, index)=>(
+            {filmList.map((film)=>(
                 <Carousel.Item>
-                    <img className="w-100 img-responsive " src={film.backdrop} style={{zIndex:0}}/>    
+                    <img className="w-100 img-responsive " src={film.backdrop} style={{zIndex:0}} alt={film["film_name"]}/>    
                     <Carousel.Caption>
-                        <h3>{film.film_name}</h3>
-                        <p>{film.overview}</p>
+                        <h3>{film["film_name"]}</h3>
+                        <p>{film["overview"]}</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                     ))}

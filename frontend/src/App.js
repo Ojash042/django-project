@@ -7,6 +7,7 @@ import {HomePage} from "./Components/HomePage";
 import {SignUpPage} from "./Components/SignUpPage";
 import {LoginPage} from "./Components/LoginPage";
 import {AccountPage} from "./Components/AccountPage";
+import {FilmDetails} from "./Components/FilmDetails";
 
 export default function App(){
     return(
@@ -16,6 +17,7 @@ export default function App(){
                 <Route path='/SignUp' Component={SignUpPage}/>
                 <Route path='/Login' Component={LoginPage}/>
                 <Route path='/accountControls' Component={AccountPage}/>
+                <Route path='/film/:imdb_id' Component={FilmDetails}/>
             </Routes>
         </BrowserRouter>
     )

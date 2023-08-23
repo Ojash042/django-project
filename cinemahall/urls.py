@@ -14,5 +14,6 @@ urlpatterns = [
     path("accountUpdate/", AccountUpdate.as_view(), name="accountUpdate"),
     path("accountInfo/", AccountInfo.as_view(), name="accountInfo"),
     path("changePassword/", change_password_view, name="changePassword"),
-    path("changePasswordPost", PasswordChange.as_view(), name="changePasswordPost"),
+    path("changePasswordPost/", PasswordChange.as_view(), name="changePasswordPost"),
+    path("film/<str:imdb_id>", film_details, name="filmDetails"),
 ]

@@ -15,18 +15,17 @@ export function AccountPage(){
             headers: {
                 "X-CSRFToken": csrftoken
             }
-        })
+        },[])
             .then((response) => {
                 setFormData({
-                    firstName: response.data["first_name"],
-                    lastName: response.data ["last_name"],
+                    firstName: response.data["first_name"], 
+                    lastName: response.data["last_name"],
                     email: response.data["email"],
                     phone: response.data["contact_info"]
                 })
             })
     },[])
     const [errorMessage, setErrorMessage] = useState([])
-    console.log("") 
     const phoneRegex = /^(98)\d{8}$/g
     
     const validateForm = {

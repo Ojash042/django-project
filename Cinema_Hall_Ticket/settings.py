@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-68x3=pxi!prni6thz($rvgjg0g_8n*)bkt8kr2qtv1^6ws_6@l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "192.168.101.17"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.humanize',
     'django.contrib.staticfiles',
     'Cinema_Hall.apps.CinemaHallConfig',
     'cinemahall.apps.CinemahallConfig',

@@ -1,7 +1,6 @@
 import json
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from rest_framework.views import APIView
@@ -71,8 +70,6 @@ def login_get(request):
     if request.user.is_authenticated:
         print("hello w")
         return redirect('/')
-    else:
-        print("HAA")
     return render(request, 'cinemahall/Login.html')
 
 
@@ -106,7 +103,6 @@ class AccountUpdate(APIView):
         return Response(status=400)
 
 
-
 class AccountInfo(APIView):
     def get(self, request):
         context = {
@@ -116,6 +112,10 @@ class AccountInfo(APIView):
             "contact_info": request.user.customer_contact_info,
         }
         return Response(context, status=200)
+
+
+def film_details(request, imdb_id):
+    return render(request, "cinemahall/film.html")
 
 
 def change_password_view(request):
