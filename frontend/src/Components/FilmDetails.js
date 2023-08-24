@@ -108,7 +108,7 @@ export function FilmDetails() {
                 </section>
                 <section className="row bg-dark">
                     {
-                        seatDetails["A"] && <Seating key={theatreSelected} seatDetails={seatDetails}/>
+                        seatDetails["A"] && <Seating key={theatreSelected} seatDetails={seatDetails} screening={screeningId}/>
                 }
                 </section>
             </div>

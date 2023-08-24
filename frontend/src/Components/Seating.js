@@ -6,18 +6,30 @@ import axios from "axios";
 import {getCookie} from "../services";
 
     
-export function Seating({seatDetails}){
+export function Seating({seatDetails, screening}){
     const csrfToken = getCookie('csrftoken')
     const [selectedSeats, setSelectedSeats] = useState([])
     
     function postSeatingReservation(){
-        axios.post('http://localhost:8000/api/placeholder',{
-            seatingReservation: selectedSeats
-        },
+        axios.post('http://localhost:8000/api/reserve-seats',{
+            seatingReservation: selectedSeats,
+            screeningId: screening
+        }, 
             {
                 headers:{
-                    "X-CSRFToken":csrfToken
+                    "X-CSRFToken": csrfToken
         }})
+            .then(response=> {
+                window.location.href = '/'
+            })
+            .catch(error => {
+            if (error["response"]["status"] === 418){
+                window.location.href = '/Login'
+            }
+            else{
+                console.log(error)
+            }
+        })
     }
     
     function changeImageIcon(id) {
@@ -26,7 +38,6 @@ export function Seating({seatDetails}){
            if (!selectedSeats.includes(id)) {
                img.src = yellowSeats
                setSelectedSeats(current => [...current, id])
-               console.log(selectedSeats)
                return
            }
            if (selectedSeats.includes(id)) {
@@ -36,7 +47,6 @@ export function Seating({seatDetails}){
                        return item !== id
                    })
                )
-               console.log(selectedSeats)
            }
        }
    }
@@ -56,7 +66,7 @@ export function Seating({seatDetails}){
                 ))}
                 </tbody>
             </table>
-            <button type="button" className="justify-content-center align-items-center btn btn-primary"onClick={() => postSeatingReservation()}>Submit</button>
+            <button type="button" className="justify-content-center align-items-center btn btn-primary" onClick={() => postSeatingReservation()}>Submit</button>
         </div>
     )
 }
